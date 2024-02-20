@@ -1,2 +1,3 @@
 # bookbot
-Bookbot project from boot.dev
+My first git project: 
+- A Bookbot project from boot.dev
