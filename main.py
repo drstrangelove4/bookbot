@@ -1,7 +1,38 @@
-from pprint import pprint
+"""
+Title: boot.dev Guided Project 1
+Purpose: Takes a text file in. Sums the total words and the a-z character count.
+Author: drstrangelove4 & boot.dev
+"""
+
 
 PATH = "books/frankenstien.txt"
-MODE = 'r'
+MODE = "r"
+
+
+# ------------------------------------------------------------------------------------------------------------------------
+def print_results(total_words):
+    """
+    A function that iterates over the dictionary values. Takes the a-z characters and prints, to the console,
+    the frequency those characters appear in desending order (most frequent to least).
+    """
+
+    # create a list of dictionaries. Scrub non a-z characters from the results.
+    alphabet_characters_total = []
+    for entry in character_dict:
+        if entry.isalpha():
+            alphabet_characters_total.append(
+                {"character": entry, "amount": character_dict[entry]}
+            )
+
+    # sort the dictionary - the most frequent char first.
+    sorted_list = sorted(
+        alphabet_characters_total, key=lambda i: i["amount"], reverse=True
+    )
+
+    # Print the results to the console.
+    print(f"There are a total of {total_words} words in {PATH}.")
+    for entry in sorted_list:
+        print(f"The character {entry['character']} appeared {entry['amount']} times.")
 
 
 # ------------------------------------------------------------------------------------------------------------------------
@@ -41,20 +72,18 @@ def main():
 
     total_words = 0
 
-    # Make the character dictionary global to remove the need to need to merge the values of 2 dictionaries 
+    # Make the character dictionary global to remove the need to need to merge the values of 2 dictionaries
     # (the count characters function would have to return one if this was local)
     global character_dict
     character_dict = {}
 
-    # Print out the content of each entry in the content list.
+    # Call functions for each line of the book.
     for line in content:
-        # print(line)
         total_words += count_words(line)
         count_characters(line)
 
     # Print values to console.
-    print(f"Word count: {total_words}")
-    pprint(character_dict)
+    print_results(total_words=total_words)
 
 
 # ------------------------------------------------------------------------------------------------------------------------
